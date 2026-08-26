@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Helix // Home</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="home">
+<div id="cursor"></div><div id="cursorGlow"></div><canvas id="stars"></canvas>
+<header class="nav">
+  <a class="logo" href="index.html"><span>
+   <img src="helix.jpg" alt="The logo" style="width: 100px; height: auto;">
+
+
+  </span> HELIX</a>
+  <nav>
+    <a class="active" href="index.html">Index</a>
+    <a href="games.html">Games</a>
+    <a href="lab.html">Chat (Coming Soon)</a>
+    <a href="public/viewer.html">Proxies</a>
+    <a href="about.html">Settings</a>
+  </nav>
+  <button class="pill" onclick="toggleTheme()">◐ Interface</button>
+</header>
+
+<style>
+  .hero {
+    display: grid !important;
+    grid-template-columns: 1.3fr 0.7fr !important;
+    align-items: center !important;
+    gap: 48px !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 40px 24px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .hero-copy {
+    max-width: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .hero h1.heavy {
+    font-size: clamp(2rem, 4.5vw, 4rem) !important; /* Slightly optimized text size scale */
+    line-height: 1.1 !important;
+    margin-bottom: 24px !important;
+    white-space: normal !important; /* Forces layout tracking text to wrap cleanly */
+  }
+</style>
+
+<main class="page-shell">
+  <section class="hero">
+    <div class="hero-copy">
+      <div class="eyebrow">HELIX // GAMES / PROXIES / GLOBAL CHAT // HELIX</div>
+      <h1 class="heavy">Welcome to the <span class="gradient-text"> HELIX </span> <br>Network.</h1>
+      <p>High-speed game access, proxy routing, private browser sessions, and premium gaming infrastructure built for players, creators, and launch-ready web experiences.</p>
+      <div class="actions"><a class="btn primary" href="games.html">ENTER GAME ZONES →</a><a class="btn" href="viewer.html">OPEN PROXY VAULT</a></div>
+      <div class="hero-badges">
+        <span>Low-latency paths</span>
+        <span>Working Proxies</span>
+        <span>Game-ready nodes</span>
+      </div>
+    </div>
+
+<div class="hero-visual">
+  <div class="orbit-frame">
+    <div class="scanline"></div>
+    <div class="pulse-core"></div>
+    <!-- Fixed: Switched from transform to zoom to keep it perfectly aligned in place -->
+    <div class="status-panel" style="zoom: 1; padding: 8px 12px; gap: 6px;">
+      <div class="status-header">
+        <span class="dot green"></span>
+        <span>Core Processes</span>
+      </div>
+      <div class="status-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px 16px;">
+        <div>
+          <label style="font-size: 0.7rem;">Nodes</label>
+          <strong id="nodes-count" data-target="320" data-suffix="+" style="font-size: 0.9rem;">320+</strong>
+        </div>
+        <div>
+          <label style="font-size: 0.7rem;">Uptime</label>
+          <strong id="uptime" data-target="0" data-suffix=".9" style="font-size: 0.9rem;">0.9</strong>
+        </div>
+        <div>
+          <label style="font-size: 0.7rem;">Version</label>
+          <strong id="version" data-target="0.8" data-suffix=".0" style="font-size: 0.9rem;">0.8.0</strong>
+        </div>
+        <div>
+          <label style="font-size: 0.7rem;">Latency</label>
+          <strong id="latency" data-target="45" data-suffix="ms" style="font-size: 0.9rem;">0ms</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let totalSeconds = 0;
+  setInterval(() => uptime.textContent = ++totalSeconds + '.9', 1000);
+  setInterval(() => latency.textContent = (Math.floor(Math.random() * 130) + 20) + 'ms', 1000);
+</script>
+
+
+</section>
+
+  <section class="brand-bar">
+    <span>VOYAGER LABS</span>
+    <span>NEBULA GRID</span>
+    <span>ORBITAL STACK</span>
+    <span>PORTAL SYSTEMS</span>
+    <span>QUANTUM NODE</span>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">INFRASTRUCTURE</span>
+        <h2 class="heavy">Game-ready proxy systems.</h2>
+      </div>
+      <p>Helix moves between gaming lobbies, proxy routing, browser access, and experimental builds in one fast, clean network stack built for action.</p>
+    </div>
+    <div class="grid three">
+      <a class="feature" href="games.html">
+        <span class="feature-num">01</span>
+        <h3>Game Zones</h3>
+        <p>Launch interactive arcade experiences, demo portals, and game-ready environments inside a cinematic gaming hub.</p>
+        <strong class="text-cyan">PLAY →</strong>
+      </a>
+      <a class="feature" href="viewer.html">
+        <span class="feature-num">02</span>
+        <h3>Proxy Vault</h3>
+        <p>Route access through secure preview channels and browser-safe sessions for quick web exploration and testing.</p>
+        <strong class="text-cyan">ROUTE →</strong>
+      </a>
+      <a class="feature" href="lab.html">
+        <span class="feature-num">03</span>
+        <h3>Premuim Tier</h3>
+        <p>Unlock over 500 Games and 3 proxies with upgraded chat functions, And a special role in our discord</p>
+        <strong class="text-cyan">BUILD →</strong>
+      </a>
+    </div>
+  </section>
+
+  
+
+
+  <section class="section feature-strip">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">LIVE ROOMS</span>
+        <h2 class="heavy">A premium gaming access stack.</h2>
+      </div>
+      <p>Every layer is designed to feel like a real digital clubhouse: fast, secure, polished, and built for players who expect quality.</p>
+    </div>
+    <div class="room-grid">
+      <article class="room-card">
+        <span class="mini-label">PROXY LANES</span>
+        <h3>Low-latency routes</h3>
+        <p>Fast, staggered access paths built for quick discovery and smoother player flow between experiences.</p>
+      </article>
+      <article class="room-card featured-room">
+        <span class="mini-label">ARENA OPS</span>
+        <h3>Live game control</h3>
+        <p>Keep your network feeling active and alive with instant status visibility, route confidence, and smarter launch sequencing.</p>
+      </article>
+      <article class="room-card">
+        <span class="mini-label">CREATOR LAB</span>
+        <h3>Prototype before launch</h3>
+        <p>Build menus, interface ideas, and interactive moments in a clean sandbox without breaking the front-end flow.</p>
+      </article>
+      <article class="room-card">
+        <span class="mini-label">SAFE PREVIEW</span>
+        <h3>Private route checks</h3>
+        <p>Review traffic, test front-end experiences, and confirm behavior before pushing a public-facing experience live.</p>
+      </article>
+    </div>
+  </section>
+
+
+
+  <section class="section testimonials">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">SOCIAL PROOF</span>
+        <h2 class="heavy">Built for ambitious teams and premium launches.</h2>
+      </div>
+      <p>Designed to feel like a flagship product experience while remaining flexible enough for real-world rollout and iteration.</p>
+    </div>
+    <div class="testimonial-grid">
+      <article class="quote-card">
+        <p>“It feels like a product that should cost more than it does, while still being approachable and fast to ship.”</p>
+        <div class="person">
+          <strong>A. Quinn</strong>
+          <span>Experience Director</span>
+        </div>
+      </article>
+      <article class="quote-card">
+        <p>“The modularity gives us room to evolve, and the interface makes our launch feel premium from day one.”</p>
+        <div class="person">
+          <strong>M. Park</strong>
+          <span>Brand Systems Lead</span>
+        </div>
+      </article>
+      <article class="quote-card">
+        <p>“Helix gives the right mix of technical structure and visual polish; it works for product, brand, and ops.”</p>
+        <div class="person">
+          <strong>S. Yates</strong>
+          <span>Launch Strategist</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+
+</main>
+
+<footer class="protocol-footer">HELIX NETWORK <span class="separator">|</span> SYSTEM STATUS: <span class="status-online">LIVE AND READY</span></footer>
+<script src="js/app.js"></script>
+</body>
+</html>

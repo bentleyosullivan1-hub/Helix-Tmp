@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Helix // Viewer</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="viewer">
+<div id="cursor"></div><div id="cursorGlow"></div><canvas id="stars"></canvas>
+<header class="nav">
+  <a class="logo" href="index.html"><span>🕹️</span> HELIX</a>
+  <nav>
+    <a href="index.html">Index</a>
+    <a href="games.html">Games</a>
+    <a href="lab.html">Chat (Coming Soon)</a>
+    <a class="active" href="viewer.html">Proxies</a>
+    <a href="about.html">Settings</a>
+  </nav>
+  <button class="pill" onclick="toggleTheme()">◐ Interface</button>
+</header>
+
+<main class="page-shell viewer-page">
+  <section class="page-hero compact">
+    <span class="eyebrow">PROXY VAULT // SAFE ACCESS</span>
+    <h1>ROUTE THE <span>GRID.</span></h1>
+    <p>This module is a controlled gaming-access preview layer for secure browsing, private route testing, and fast portal checks without exposing unrestricted backend access.</p>
+  </section>
+
+  <section class="viewer-layout">
+    <div class="browser">
+      <div class="browser-top">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <form id="urlForm">
+          <input id="urlInput" value="https://example.com" placeholder="https://example.com">
+          <button>GO</button>
+        </form>
+      </div>
+      <div class="browser-body">
+        <iframe id="webFrame" src="https://example.com" title="Web preview" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-scripts"></iframe>
+        <div id="viewerNote">If the destination refuses iframe embedding, that is controlled by the destination site.</div>
+      </div>
+    </div>
+
+    <aside class="info-panel">
+      <small>SAFE USE</small>
+      <h3>What this viewer is built for.</h3>
+      <ul class="clean-list">
+        <li>Protected public previewing</li>
+        <li>Manual QA checks</li>
+        <li>Partner and campaign review</li>
+        <li>Restricted front-end testing</li>
+      </ul>
+      <div class="notice">
+        <b>Heads up:</b> This is intentionally not an unrestricted proxy or filter-bypass service. For a true backend proxy, use a server you control and apply authentication, allowlists, and abuse protection.
+      </div>
+    </aside>
+  </section>
+</main>
+
+<footer class="protocol-footer">HELIX VIEWER <span class="separator">|</span> SAFE PREVIEW MODE</footer>
+<script src="js/app.js"></script>
+<script src="js/viewer.js"></script>
+</body>
+</html>

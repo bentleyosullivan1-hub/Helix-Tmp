@@ -1,0 +1,22 @@
+{
+  "name": "helix-scramjet-viewer",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "build": "node scripts/build-site.mjs",
+    "test": "node --check server.js && node --check scripts/build-site.mjs && node --check scripts/verify-site.mjs && node --check js/app.js && node --check js/games.js && node --check js/lab.js && node --check js/lab-fallback.js && node --check js/viewer.js && node --check register-sw.js && node --check sw.js && node scripts/verify-site.mjs"
+  },
+  "dependencies": {
+    "fastify": "^5.7.4",
+    "@fastify/static": "^9.0.0",
+    "@mercuryworkshop/bare-mux": "^2.1.9",
+    "@mercuryworkshop/libcurl-transport": "^1.5.2",
+    "@mercuryworkshop/scramjet": "https://github.com/MercuryWorkshop/scramjet/releases/download/v1.1.0/mercuryworkshop-scramjet-1.1.0.tgz",
+    "@mercuryworkshop/wisp-js": "^0.4.1"
+  }
+}

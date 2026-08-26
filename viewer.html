@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Helix // Viewer</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="viewer">
+<div id="cursor"></div><div id="cursorGlow"></div><canvas id="stars"></canvas>
+<header class="nav">
+  <a class="logo" href="index.html"><span>🕹️</span> HELIX</a>
+  <nav>
+    <a href="index.html">Index</a>
+    <a href="games.html">Games</a>
+    <a href="lab.html">Chat (Coming Soon)</a>
+    <a class="active" href="viewer.html">Proxies</a>
+    <a href="about.html">Settings</a>
+  </nav>
+  <button class="pill" onclick="toggleTheme()">◐ Interface</button>
+</header>
+
+<main class="page-shell viewer-page viewer-command-deck">
+  <section class="viewer-intro">
+    <div><span class="eyebrow">HELIX // PRIVATE ROUTE</span><h1>THE <span>VIEWER.</span></h1></div>
+    <p>Enter an address, launch the route, and keep the web in your command deck.</p>
+  </section>
+
+  <section class="viewer-layout">
+    <div class="browser viewer-browser" id="viewerShell">
+      <div class="browser-top">
+        <div class="browser-dots" aria-hidden="true"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <form id="urlForm">
+          <label class="sr-only" for="urlInput">Website address</label><span class="address-icon" aria-hidden="true">⌁</span>
+          <input id="urlInput" value="https://www.google.com" placeholder="Search or enter a website" spellcheck="false" autocapitalize="none" inputmode="url">
+          <button type="submit">ROUTE <span aria-hidden="true">↗</span></button>
+        </form>
+        <button class="viewer-icon-button" id="viewerFullscreen" type="button" aria-label="Toggle full-screen viewer" title="Full screen">⛶</button>
+      </div>
+      <div class="browser-body">
+        <div id="webFrame" class="scramjet-frame-host" aria-label="Helix browser"></div>
+        <div id="viewerNote" role="status" aria-live="polite"><span class="status-pulse"></span>Connecting to the Helix viewer…</div>
+      </div>
+      <div class="viewer-footerbar"><span id="viewerMode" class="viewer-mode">INITIALISING</span><span class="viewer-hint">Press Enter to route a new address</span></div>
+    </div>
+
+    <aside class="info-panel viewer-sidebar">
+      <small>QUICK ROUTES</small><h3>Launch point.</h3>
+      <div class="route-list" aria-label="Quick routes">
+        <button type="button" data-route="https://www.google.com"><span>G</span> Google</button>
+        <button type="button" data-route="https://www.wikipedia.org"><span>✦</span> Wikipedia</button>
+        <button type="button" data-route="https://developer.mozilla.org"><span>⌘</span> MDN Docs</button>
+      </div>
+      <div class="viewer-signal"><span class="signal-dot"></span><div><b>ROUTE STATUS</b><span id="viewerStatus" aria-live="polite">Preparing secure session</span></div></div>
+      <div class="notice viewer-notice">The local server enables the full routed viewer. On GitHub Pages, Helix switches to preview mode automatically.</div>
+    </aside>
+  </section>
+</main>
+
+<footer class="protocol-footer">HELIX VIEWER <span class="separator">|</span> SAFE PREVIEW MODE</footer>
+<script src="/scram/scramjet.all.js"></script>
+<script src="/baremux/index.js"></script>
+<script src="/register-sw.js"></script>
+<script src="js/app.js"></script>
+<script src="js/viewer.js"></script>
+</body>
+</html>

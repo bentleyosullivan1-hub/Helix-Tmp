@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Helix // System</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="system">
+<div id="cursor"></div><div id="cursorGlow"></div><canvas id="stars"></canvas>
+<header class="nav">
+  <a class="logo" href="index.html"><span>🕹️</span> HELIX</a>
+  <nav>
+    <a href="index.html">Index</a>
+    <a href="games.html">Games</a>
+    <a href="lab.html">Chat (Coming Soon)</a>
+    <a href="viewer.html">Proxies</a>
+    <a class="active" href="about.html">Settings</a>
+  </nav>
+  <button class="pill" onclick="toggleTheme()">◐ Interface</button>
+</header>
+
+<main class="page-shell">
+  <section class="settings-panel">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">INTERFACE // PERSONALIZE</span>
+        <h2>Control your signal.</h2>
+      </div>
+      <p>These preferences are saved on this device and apply across the entire Helix portal.</p>
+    </div>
+    <div class="settings-grid">
+      <label class="setting-control">
+        <span><strong>Theme</strong><small>Choose the interface atmosphere</small></span>
+        <select data-setting="theme">
+          <option value="dark">Deep space</option>
+          <option value="light">Daylight</option>
+          <option value="midnight">Midnight blue</option>
+        </select>
+      </label>
+      <label class="setting-control">
+        <span><strong>Signal color</strong><small>Set the portal accent</small></span>
+        <select data-setting="accent">
+          <option value="cyan">Cyan pulse</option>
+          <option value="mint">Mint circuit</option>
+          <option value="amber">Amber console</option>
+          <option value="rose">Rose neon</option>
+        </select>
+      </label>
+      <label class="setting-control">
+        <span><strong>Cloak mode</strong><small>Change the browser tab identity</small></span>
+        <select data-setting="cloak">
+          <option value="helix">Helix</option>
+          <option value="study">Study Notes</option>
+          <option value="weather">Weather</option>
+          <option value="blank">Blank tab</option>
+        </select>
+      </label>
+      <label class="setting-control">
+        <span><strong>Cursor style</strong><small>Choose your pointer signal</small></span>
+        <select data-setting="cursor">
+          <option value="orb">Orbital glow</option>
+          <option value="crosshair">Crosshair</option>
+          <option value="dot">Minimal dot</option>
+          <option value="off">System cursor</option>
+        </select>
+      </label>
+      <label class="setting-control range-control">
+        <span><strong>Star density</strong><small><output data-output="starDensity">260</output> particles</small></span>
+        <input type="range" data-setting="starDensity" min="40" max="420" step="20" value="260">
+      </label>
+      <label class="setting-control range-control">
+        <span><strong>Grid scale</strong><small><output data-output="gridScale">48</output> px cells</small></span>
+        <input type="range" data-setting="gridScale" min="32" max="96" step="8" value="48">
+      </label>
+      <label class="setting-toggle"><input type="checkbox" data-setting="stars" checked><span><strong>Starfield</strong><small>Show moving background particles</small></span></label>
+      <label class="setting-toggle"><input type="checkbox" data-setting="grid" checked><span><strong>Navigation grid</strong><small>Show the drifting coordinate mesh</small></span></label>
+      <label class="setting-toggle"><input type="checkbox" data-setting="motion" checked><span><strong>Motion effects</strong><small>Keep page transitions and ambient movement</small></span></label>
+    </div>
+    <button class="btn settings-reset" type="button" data-reset-settings>Reset preferences</button>
+  </section>
+
+  </main>
+
+<footer class="protocol-footer">HELIX NETWORK <span class="separator">|</span> SYSTEM ONLINE</footer>
+<script src="js/app.js"></script>
+</body>
+</html>
