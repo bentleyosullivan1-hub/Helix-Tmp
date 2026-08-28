@@ -7,6 +7,7 @@ import { server as wisp, logging } from "@mercuryworkshop/wisp-js/server";
 import { scramjetPath } from "@mercuryworkshop/scramjet/path";
 import { libcurlPath } from "@mercuryworkshop/libcurl-transport";
 import { baremuxPath } from "@mercuryworkshop/bare-mux/node";
+import setPremiumHandler from "./api/admin/set-premium.js";
 
 const sitePath = fileURLToPath(new URL("./", import.meta.url));
 const PORT = Number(process.env.PORT || 8080);
@@ -67,6 +68,30 @@ app.register(fastifyStatic, {
   root: baremuxPath,
   prefix: "/baremux/",
   decorateReply: false
+});
+
+// Reuse the exact same handler Vercel runs at /api/admin/set-premium,
+// via a minimal shim translating Fastify's (request, reply) into the
+// (req, res) shape Vercel serverless functions receive.
+app.post("/api/admin/set-premium", async (request, reply) => {
+  const res = {
+    _status: 200,
+    status(code) {
+      this._status = code;
+      return this;
+    },
+    json(body) {
+      reply.code(this._status).send(body);
+    },
+    setHeader(name, value) {
+      reply.header(name, value);
+    }
+  };
+
+  await setPremiumHandler(
+    { method: "POST", headers: request.headers, body: request.body },
+    res
+  );
 });
 
 app.setNotFoundHandler((req, reply) => {

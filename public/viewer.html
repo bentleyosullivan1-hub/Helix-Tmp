@@ -4,6 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Helix // Viewer</title>
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/proxy-fallback.css">
 </head>
 <body data-page="viewer">
 <div id="cursor"></div><div id="cursorGlow"></div><canvas id="stars"></canvas>
@@ -12,7 +13,7 @@
   <nav>
     <a href="index.html">Index</a>
     <a href="games.html">Games</a>
-    <a href="lab.html">Chat</a>
+    <a href="lab.html">Chat (Coming Soon)</a>
     <a class="active" href="viewer.html">Proxies</a>
     <a href="about.html">Settings</a>
   </nav>
@@ -38,8 +39,8 @@
         </form>
       </div>
       <div class="browser-body">
-        <iframe id="webFrame" src="https://example.com" title="Web preview" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-scripts"></iframe>
-        <div id="viewerNote">If the destination refuses iframe embedding, that is controlled by the destination site.</div>
+        <div id="webFrame" class="scramjet-frame-host" aria-label="Scramjet browser"></div>
+        <div id="viewerNote">Scramjet is loading the destination inside the Helix viewer.</div>
       </div>
     </div>
 
@@ -59,7 +60,32 @@
   </section>
 </main>
 
+<!-- Example Button and Element -->
+<button id="fullscreen-btn">Go Full Screen</button>
+<div id="scramjet-container">
+  <!-- Your Scramjet content or canvas here -->
+</div>
+
+<script>
+  const button = document.getElementById('fullscreen-btn');
+  const element = document.getElementById('scramjet-container');
+
+  button.addEventListener('click', () => {
+    if (!document.fullscreenElement) {
+      element.requestFullscreen().catch(err => {
+        alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+      });
+    } else {
+      document.exitFullscreen();
+    }
+  });
+</script>
+
+
 <footer class="protocol-footer">HELIX VIEWER <span class="separator">|</span> SAFE PREVIEW MODE</footer>
+<script src="/scram/scramjet.all.js"></script>
+<script src="/baremux/index.js"></script>
+<script src="/register-sw.js"></script>
 <script src="js/app.js"></script>
 <script src="js/viewer.js"></script>
 </body>

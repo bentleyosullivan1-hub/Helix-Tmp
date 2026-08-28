@@ -475,6 +475,166 @@
 
 
 /* =========================================================
+   PREMIUM BADGE
+========================================================= */
+
+.premium-badge {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    margin-left: 6px;
+
+    padding: 1px 7px;
+
+    border-radius: 999px;
+
+    font-size: .62rem;
+
+    font-weight: 700;
+
+    letter-spacing: .04em;
+
+    color: #16121f;
+
+    background: linear-gradient(135deg, #ffd76a, #ff9ecf 60%, var(--chat-accent));
+}
+
+
+/* =========================================================
+   ACCOUNT PANEL
+========================================================= */
+
+.account-panel {
+
+    padding: 14px 16px;
+
+    border-bottom: 1px solid var(--chat-border);
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.account-panel .account-row {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 8px;
+
+    font-size: .8rem;
+
+    color: var(--chat-muted);
+}
+
+.account-panel .account-name {
+
+    color: var(--chat-text);
+
+    font-weight: 600;
+}
+
+.account-panel form {
+
+    display: none;
+
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+.account-panel form.open {
+
+    display: flex;
+}
+
+.account-panel input {
+
+    padding: 8px 10px;
+
+    border-radius: 8px;
+
+    border: 1px solid var(--chat-border);
+
+    background: rgba(255,255,255,.04);
+
+    color: var(--chat-text);
+
+    font-size: .8rem;
+}
+
+.account-panel .account-actions {
+
+    display: flex;
+
+    gap: 6px;
+}
+
+.account-panel button {
+
+    flex: 1;
+
+    padding: 7px 10px;
+
+    border-radius: 8px;
+
+    border: 1px solid var(--chat-border);
+
+    background: rgba(255,255,255,.05);
+
+    color: var(--chat-text);
+
+    font-size: .75rem;
+
+    cursor: pointer;
+}
+
+.account-panel button.primary {
+
+    background: var(--chat-accent);
+
+    border-color: transparent;
+
+    color: white;
+
+    font-weight: 600;
+}
+
+.account-panel .account-msg {
+
+    font-size: .72rem;
+
+    min-height: 1em;
+
+    color: var(--chat-muted);
+}
+
+.link-button {
+
+    background: none;
+
+    border: 0;
+
+    color: var(--chat-accent);
+
+    font-size: .78rem;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    padding: 0;
+}
+
+
+/* =========================================================
    USER SIDEBAR
 ========================================================= */
 
@@ -803,6 +963,25 @@ Send
 
 <aside class="user-sidebar">
 
+<div class="account-panel" id="accountPanel">
+
+  <div class="account-row">
+    <span>Signed in as <span class="account-name" id="accountName">Guest</span></span>
+    <button type="button" id="accountToggle" class="link-button">Sign in</button>
+  </div>
+
+  <form id="signInForm">
+    <input type="email" id="signInEmail" placeholder="Email" autocomplete="email" required>
+    <input type="password" id="signInPassword" placeholder="Password" autocomplete="current-password" required>
+    <div class="account-actions">
+      <button type="submit" class="primary">Sign in</button>
+      <button type="button" id="signUpBtn">Create account</button>
+    </div>
+    <div class="account-msg" id="accountMsg"></div>
+  </form>
+
+</div>
+
 <div class="user-header">
 
 ONLINE — <span id="onlineCount">0</span>
@@ -868,6 +1047,10 @@ const supabase =
 let currentUser = null;
 
 let profile = null;
+
+// user_ids known to currently be premium, so message history (which
+// doesn't carry is_premium itself) can still show the badge.
+let premiumUserIds = new Set();
 
 let currentChannel = null;
 
@@ -937,6 +1120,12 @@ function avatarLetter(name) {
 /* ============================================================
    STATUS
 ============================================================ */
+
+/* NOTE: enableOfflineChat() lives in js/lab-fallback.js — that file
+   was referenced by the <script> tag above but was missing from
+   the deployed site, which is the actual bug that broke chat: every
+   Supabase error path called an undefined function and threw
+   instead of falling back. See js/lab-fallback.js. */
 
 function setConnection(
     online,
@@ -1106,6 +1295,176 @@ async function loadProfile() {
 
 
     profile = created;
+
+}
+
+
+/* ============================================================
+   PREMIUM
+============================================================ */
+
+async function loadPremiumUsers() {
+
+    if (offlineMode) return;
+
+    const {
+        data,
+        error
+    } =
+        await supabase
+
+            .from("chat_profiles")
+
+            .select("user_id")
+
+            .eq("is_premium", true);
+
+    if (error) {
+
+        console.error(error);
+
+        return;
+    }
+
+    premiumUserIds =
+        new Set(
+            data.map(row => row.user_id)
+        );
+
+}
+
+/* ============================================================
+   ACCOUNT UI (email/password on top of anonymous chat)
+============================================================ */
+
+const accountToggle = document.getElementById("accountToggle");
+const accountName = document.getElementById("accountName");
+const accountMsg = document.getElementById("accountMsg");
+const signInForm = document.getElementById("signInForm");
+const signUpBtn = document.getElementById("signUpBtn");
+
+function applyAccountUI() {
+
+    const isAnonymous =
+        !currentUser?.email;
+
+    accountName.textContent =
+        profile?.username || "Guest";
+
+    if (profile?.is_premium) {
+
+        accountName.appendChild(
+            premiumBadge()
+        );
+    }
+
+    accountToggle.textContent =
+        isAnonymous ? "Sign in" : "Sign out";
+
+}
+
+accountToggle?.addEventListener("click", async () => {
+
+    const isAnonymous =
+        !currentUser?.email;
+
+    if (isAnonymous) {
+
+        signInForm.classList.toggle("open");
+
+        return;
+    }
+
+    await supabase.auth.signOut();
+
+    location.reload();
+
+});
+
+signInForm?.addEventListener("submit", async event => {
+
+    event.preventDefault();
+
+    accountMsg.textContent = "Signing in…";
+
+    const email = document.getElementById("signInEmail").value.trim();
+    const password = document.getElementById("signInPassword").value;
+
+    const { error } =
+        await supabase.auth.signInWithPassword({ email, password });
+
+    if (error) {
+
+        accountMsg.textContent = error.message;
+        return;
+    }
+
+    location.reload();
+
+});
+
+signUpBtn?.addEventListener("click", async () => {
+
+    const email = document.getElementById("signInEmail").value.trim();
+    const password = document.getElementById("signInPassword").value;
+
+    if (!email || !password) {
+
+        accountMsg.textContent = "Enter an email and password first.";
+        return;
+    }
+
+    accountMsg.textContent = "Creating account…";
+
+    // If the current session is anonymous (the normal state for every
+    // guest visiting the chat), LINK it to the new email/password
+    // instead of creating a brand-new, unrelated user. Linking keeps
+    // the same user_id, so the existing chat_profiles row (username,
+    // is_premium, is_moderator) and message history carry over instead
+    // of being silently orphaned under a throwaway anonymous account.
+    const isAnonymous = !!currentUser?.is_anonymous;
+
+    const { data, error } = isAnonymous
+        ? await supabase.auth.updateUser({ email, password })
+        : await supabase.auth.signUp({ email, password });
+
+    if (error) {
+
+        accountMsg.textContent = error.message;
+        return;
+    }
+
+    if (!isAnonymous && !data.session) {
+
+        accountMsg.textContent = "Check your email to confirm, then sign in.";
+        return;
+    }
+
+    if (isAnonymous) {
+
+        accountMsg.textContent = "Account linked. If email confirmations are enabled, check your inbox to finish confirming.";
+    }
+
+    location.reload();
+
+});
+
+
+function premiumBadge() {
+
+    const badge =
+        document.createElement("span");
+
+    badge.className =
+        "premium-badge";
+
+    badge.textContent =
+        "✦ PREMIUM";
+
+    badge.title =
+        "Helix Premium member";
+
+    return badge;
 
 }
 
@@ -1354,6 +1713,15 @@ function renderMessage(message) {
     user.textContent =
         message.username;
 
+    top.appendChild(user);
+
+    if (premiumUserIds.has(message.user_id)) {
+
+        top.appendChild(
+            premiumBadge()
+        );
+
+    }
 
     const time =
         document.createElement("span");
@@ -1366,8 +1734,6 @@ function renderMessage(message) {
             message.created_at
         ).toLocaleString();
 
-
-    top.appendChild(user);
 
     top.appendChild(time);
 
@@ -1630,6 +1996,9 @@ async function setupRealtime() {
                                     profile.username
                                 ),
 
+                            is_premium:
+                                !!profile.is_premium,
+
                             typing:
                                 false
 
@@ -1736,6 +2105,14 @@ function renderUsers() {
         row.appendChild(avatar);
 
         row.appendChild(name);
+
+        if (user.is_premium) {
+
+            row.appendChild(
+                premiumBadge()
+            );
+
+        }
 
         row.appendChild(dot);
 
@@ -1997,6 +2374,10 @@ async function start() {
         return;
     }
 
+
+    await loadPremiumUsers();
+
+    applyAccountUI();
 
     await loadChannels();
 

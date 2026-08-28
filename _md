@@ -1,0 +1,19 @@
+# NEBULA Space Portal
+
+A large futuristic static website starter.
+
+## Pages
+- `index.html` — landing page
+- `games.html` — arcade catalogue
+- `viewer.html` — embedded web previewer
+- `lab.html` — sandboxed custom HTML lab
+- `about.html` — system/roadmap
+
+## Add games
+Put game HTML files in `games/`, then add a card and launcher in `games.html` / `js/games.js`.
+
+## Deploy
+Upload the whole folder to any static host.
+
+## Security
+The web viewer is intentionally an iframe previewer, not an unrestricted proxy. If you add a backend fetcher later, use authentication, destination controls, rate limiting, logging and abuse protection.

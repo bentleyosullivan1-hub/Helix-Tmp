@@ -2,7 +2,7 @@
 
 ## Local development
 
-Install Node.js 24.x, then run `npm ci` followed by `npm start`, or double-click `start.bat`. The local Scramjet proxy viewer is available at `http://localhost:8080/viewer.html`; all viewer files now live in the project root.
+Install Node.js 24, then run `npm ci` followed by `npm start`, or double-click `start.bat`. The local Scramjet proxy viewer is available at `http://localhost:8080/viewer.html`; all viewer files now live in the project root.
 
 ## GitHub Pages
 

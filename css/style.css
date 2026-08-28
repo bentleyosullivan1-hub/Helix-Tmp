@@ -209,6 +209,12 @@ nav a:hover, nav a.active { color: #fff; text-shadow: 0 0 20px rgba(255,255,255,
   -webkit-background-clip: text;
   color: transparent;
 }
+.heavy { font-weight: 800; letter-spacing: -0.03em; }
+.hero h1.heavy {
+  font-size: clamp(2.25rem, 4.5vw, 4.25rem);
+  line-height: 1.1;
+  margin-bottom: 24px;
+}
 .page-hero p, .hero p {
   max-width: 680px;
   color: var(--muted);
@@ -227,12 +233,12 @@ nav a:hover, nav a.active { color: #fff; text-shadow: 0 0 20px rgba(255,255,255,
 .hero {
   padding: 120px 0 50px;
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-columns: 1.3fr 0.7fr;
   gap: 40px;
   align-items: center;
   min-height: 720px;
 }
-.hero-copy { max-width: 700px; }
+.hero-copy { max-width: 100%; }
 .hero-badges {
   display: flex;
   flex-wrap: wrap;
