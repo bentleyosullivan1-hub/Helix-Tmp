@@ -77,7 +77,7 @@ function makeCard(game,index){
 function filterGames(){
 	const query=(search.value||'').toLowerCase(),active=document.querySelector('.filter.active').dataset.filter;
 	grid.querySelectorAll('.game-card').forEach(card=>{
-		card.style.display=(!query||card.innerText.toLowerCase().includes(query))&&(active==='all'||card.dataset.tags===active)?'':'none';
+		card.style.display=(!query||card.textContent.toLowerCase().includes(query))&&(active==='all'||card.dataset.tags===active)?'':'none';
 	});
 }
 

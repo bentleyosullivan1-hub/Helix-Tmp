@@ -2,7 +2,7 @@ import { access, readdir, readFile, stat } from "node:fs/promises";
 import { resolve, relative, sep } from "node:path";
 
 const root = process.cwd();
-const topLevelPages = ["index.html", "about.html", "games.html", "lab.html", "viewer.html"];
+const topLevelPages = ["index.html", "about.html", "games.html", "lab.html", "viewer.html", "admin.html", "login.html"];
 const failures = [];
 
 async function exists(path) {

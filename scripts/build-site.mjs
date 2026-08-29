@@ -9,6 +9,8 @@ const publishPaths = [
   "games.html",
   "lab.html",
   "viewer.html",
+  "admin.html",
+  "login.html",
   "helix.jpg",
   "register-sw.js",
   "sw.js",
